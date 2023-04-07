@@ -18,4 +18,4 @@ const ChatBar = ({ socket }) => {
     </div>
   );
 };
-export default ChatBar;
+export default React.memo(ChatBar);
