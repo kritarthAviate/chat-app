@@ -20,6 +20,10 @@ const ChatPage = ({ socket }) => {
     socket.on("typingResponse", (data) => setTypingStatus(data));
   }, [socket]);
 
+  useEffect(() => {
+    socket.on("stopTypingResponse", () => setTypingStatus(""));
+  }, [socket]);
+
   return (
     <div className="chat">
       <ChatBar socket={socket} />

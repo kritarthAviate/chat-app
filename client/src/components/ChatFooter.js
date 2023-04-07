@@ -4,6 +4,9 @@ const ChatFooter = ({ socket }) => {
 
   const handleTyping = () => {
     socket.emit("typing", `${localStorage.getItem("userName")} is typing`);
+    setTimeout(() => {
+      socket.emit("stopTyping");
+    }, 1000);
   };
 
   const handleSendMessage = (e) => {
