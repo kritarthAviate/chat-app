@@ -22,14 +22,16 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// init socket.io
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
 
 let users = [];
 
+// socket connection handler
 socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
   socket.on("message", (data) => {
