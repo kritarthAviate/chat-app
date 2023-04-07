@@ -39,6 +39,7 @@ socketIO.on("connection", (socket) => {
   });
 
   socket.on("typing", (data) => socket.broadcast.emit("typingResponse", data));
+  socket.on("stopTyping", () => socket.broadcast.emit("stopTypingResponse"));
 
   socket.on("newUser", (data) => {
     users.push(data);
