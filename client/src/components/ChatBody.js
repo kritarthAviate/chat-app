@@ -4,6 +4,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }) => {
   const navigate = useNavigate();
   const handleLeaveChat = () => {
     localStorage.removeItem("userName");
+    localStorage.removeItem("roomId");
     navigate("/");
     window.location.reload();
   };
@@ -12,7 +13,7 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }) => {
       <header className="chat__mainHeader">
         <p>Hangout with Colleagues</p>
         <button className="leaveChat__btn" onClick={handleLeaveChat}>
-          LEAVE CHAT
+          LEAVE ROOM
         </button>
       </header>
       <div className="message__container">

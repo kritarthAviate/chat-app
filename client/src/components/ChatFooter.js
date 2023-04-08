@@ -23,13 +23,22 @@ const ChatFooter = ({ socket }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    if (message.trim() && localStorage.getItem("userName")) {
-      socket.emit("message", {
-        text: message,
-        name: localStorage.getItem("userName"),
-        id: `${socket.id}${Math.random()}`,
-        socketID: socket.id,
-      });
+    if (
+      message.trim() &&
+      localStorage.getItem("userName") &&
+      localStorage.getItem("roomId")
+    ) {
+      socket.emit(
+        "message",
+        {
+          text: message,
+          name: localStorage.getItem("userName"),
+          id: `${socket.id}${Math.random()}`,
+          socketID: socket.id,
+          roomId: localStorage.getItem("roomId"),
+        },
+        localStorage.getItem("roomId")
+      );
     }
     setMessage("");
   };
