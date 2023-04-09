@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 const ChatBar = ({ socket }) => {
   const [users, setUsers] = useState([]);
   console.log({ users }, "from chatbar");
@@ -38,4 +39,5 @@ const ChatBar = ({ socket }) => {
     </div>
   );
 };
+
 export default React.memo(ChatBar);

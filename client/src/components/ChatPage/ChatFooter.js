@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+
 const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const timeout = useRef(null);
@@ -42,6 +43,7 @@ const ChatFooter = ({ socket }) => {
     }
     setMessage("");
   };
+  
   return (
     <div className="chat__footer">
       <form className="form" onSubmit={handleSendMessage}>
@@ -60,4 +62,5 @@ const ChatFooter = ({ socket }) => {
     </div>
   );
 };
+
 export default ChatFooter;

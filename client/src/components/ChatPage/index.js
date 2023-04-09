@@ -1,11 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
+
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
+
 const ChatPage = ({ socket }) => {
   const [messages, setMessages] = useState([]);
   const [typingStatus, setTypingStatus] = useState("");
   const lastMessageRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+       localStorage.clear();
+    }
+  },[])
 
   useEffect(() => {
     socket.on("messageResponse", (data) => {
@@ -41,4 +49,5 @@ const ChatPage = ({ socket }) => {
     </div>
   );
 };
+
 export default ChatPage;

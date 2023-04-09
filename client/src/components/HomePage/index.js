@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import uuid from "short-uuid";
-const Home = ({ socket }) => {
+
+const HomePage = ({ socket }) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [roomId, setRoomId] = useState("");
   const [openRoomIdInput, setOpenRoomIdInput] = useState(false);
   const disabled = !userName?.trim()?.length;
+  
   const handleCreateRoom = (e) => {
     e.preventDefault();
     if (!userName?.trim()?.length) return;
@@ -22,8 +24,12 @@ const Home = ({ socket }) => {
       },
       roomId
     );
+
+    localStorage.setItem("isLoggedIn", true);
     navigate("/chat");
+
   };
+
   const handleJoinRoom = (e) => {
     e.preventDefault();
     if (!userName?.trim()?.length) return;
@@ -35,6 +41,7 @@ const Home = ({ socket }) => {
     localStorage.setItem("userName", userName);
     localStorage.setItem("roomId", roomId);
     socket.emit("joinRoom", { userName, socketID: socket.id, roomId }, roomId);
+    localStorage.setItem("isLoggedIn", true);
     navigate("/chat");
   };
 
@@ -86,4 +93,5 @@ const Home = ({ socket }) => {
     </form>
   );
 };
-export default Home;
+
+export default HomePage;
