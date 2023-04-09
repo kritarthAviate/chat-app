@@ -17,7 +17,6 @@ const ChatPage = ({ socket }) => {
 
   useEffect(() => {
     socket.on("messageResponse", (data) => {
-      console.log("messageData", { data });
       setMessages([...messages, data]);
     });
   }, [socket, messages]);

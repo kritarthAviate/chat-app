@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const ChatBody = ({ messages, lastMessageRef, typingStatus }) => {
   const navigate = useNavigate();
+  
   const handleLeaveChat = () => {
     localStorage.clear();
     navigate("/");
