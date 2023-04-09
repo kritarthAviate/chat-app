@@ -18,7 +18,7 @@ $ yarn start
 
 
 ## Tech Stack
-Project is created with:
+Main libraries and frameworks used:
 * React
 * Javascript
 * Express
