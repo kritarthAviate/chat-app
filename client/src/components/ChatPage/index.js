@@ -1,14 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
+
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
+
 const ChatPage = ({ socket }) => {
   const [messages, setMessages] = useState([]);
   const [typingStatus, setTypingStatus] = useState("");
   const lastMessageRef = useRef(null);
 
   useEffect(() => {
-    socket.on("messageResponse", (data) => setMessages([...messages, data]));
+    return () => {
+      localStorage.removeItem("isLoggedIn");
+    }
+  },[])
+
+  useEffect(() => {
+    socket.on("messageResponse", (data) => {
+      setMessages([...messages, data]);
+    });
   }, [socket, messages]);
 
   useEffect(() => {
@@ -38,4 +48,5 @@ const ChatPage = ({ socket }) => {
     </div>
   );
 };
+
 export default ChatPage;

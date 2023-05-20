@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+
 const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const timeout = useRef(null);
@@ -23,16 +24,26 @@ const ChatFooter = ({ socket }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    if (message.trim() && localStorage.getItem("userName")) {
-      socket.emit("message", {
-        text: message,
-        name: localStorage.getItem("userName"),
-        id: `${socket.id}${Math.random()}`,
-        socketID: socket.id,
-      });
+    if (
+      message.trim() &&
+      localStorage.getItem("userName") &&
+      localStorage.getItem("roomId")
+    ) {
+      socket.emit(
+        "message",
+        {
+          text: message,
+          name: localStorage.getItem("userName"),
+          id: `${socket.id}${Math.random()}`,
+          socketID: socket.id,
+          roomId: localStorage.getItem("roomId"),
+        },
+        localStorage.getItem("roomId")
+      );
     }
     setMessage("");
   };
+  
   return (
     <div className="chat__footer">
       <form className="form" onSubmit={handleSendMessage}>
@@ -51,4 +62,5 @@ const ChatFooter = ({ socket }) => {
     </div>
   );
 };
+
 export default ChatFooter;

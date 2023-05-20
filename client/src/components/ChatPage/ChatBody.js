@@ -1,18 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 const ChatBody = ({ messages, lastMessageRef, typingStatus }) => {
   const navigate = useNavigate();
+  
   const handleLeaveChat = () => {
-    localStorage.removeItem("userName");
+    localStorage.clear();
     navigate("/");
     window.location.reload();
   };
+
   return (
     <>
       <header className="chat__mainHeader">
         <p>Hangout with Colleagues</p>
         <button className="leaveChat__btn" onClick={handleLeaveChat}>
-          LEAVE CHAT
+          LEAVE ROOM
         </button>
       </header>
       <div className="message__container">
@@ -41,4 +44,5 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus }) => {
     </>
   );
 };
+
 export default ChatBody;
